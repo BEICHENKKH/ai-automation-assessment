@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 自动化潜力测评 — 你的企业适不适合 AI 自动化？</title>
+<meta name="description" content="专为中小企业设计的免费 AI 自动化潜力测评工具。覆盖电商、餐饮、教育、专业服务等 6 大行业，3 分钟测出你的企业 AI 自动化潜力分数，获取个性化工作流推荐。">
+<meta name="keywords" content="AI自动化测评,中小企业AI,AI工作流,企业自动化评估,AI能替代哪些工作,免费AI测评">
+<meta property="og:title" content="AI 自动化潜力测评 — 你的企业适不适合 AI 自动化？">
+<meta property="og:description" content="3 分钟出结果 · 覆盖 6 大行业 · 免费测评 · 获取个性化 AI 工作流推荐">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://placehold.co/1200x630/1A3A5C/FAFAF8?text=AI+自动化潜力测评">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI 自动化潜力测评",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CNY" },
+  "description": "专为中小企业设计的免费 AI 自动化潜力测评工具，3 分钟测出企业的 AI 自动化潜力分数并获取个性化工作流推荐。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question", "name": "这个 AI 自动化测评准确吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "测评基于中小企业在 8 大高频场景下的真实自动化需求设计，结合行业特性和团队规模综合计算。它反映的是 AI 自动化的潜力天花板，而非绝对精确值——分数越高，说明你的企业越适合引入 AI 工作流来降本增效。" }
+    },
+    {
+      "@type": "Question", "name": "测评需要什么技术基础吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "完全不需要。你只需要根据自己的业务实际情况勾选痛点和行业，3 分钟即可完成。测评结果也会用通俗语言解释，不涉及任何技术术语。" }
+    },
+    {
+      "@type": "Question", "name": "我的数据安全吗？",
+      "acceptedAnswer": { "@type": "Answer", "text": "测评完全在浏览器本地运行，不会上传任何数据到服务器。你可以放心使用。" }
+    }
+  ]
+}
+</script>
+
+<style>
+  /* ══════════════════════════════════════════
+     MAGAZINE EDITORIAL — DESIGN TOKENS
+     ══════════════════════════════════════════ */
+  :root {
+    --ink:       #1A1A1A;
+    --ink-light: #555555;
+    --ink-muted: #8A8A82;
+    --paper:     #FAFAF8;
+    --surface:   #FFFFFF;
+    --border:    #D8D8D0;
+    --border-light: #EBEBE3;
+    --navy:      #1A3A5C;
+    --navy-dim:  #2A5080;
+    --red:       #C44536;
+    --red-dim:   #A03A2E;
+    --amber:     #B8860B;
+    --green:     #2D7D46;
+    --rule:      1px solid var(--border);
+    --font-serif: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ MASTHEAD ═══ */
+  .masthead {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 20px 48px;
+  }
+  .masthead .kicker {
+    font-family: var(--font-sans);
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .masthead h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .masthead .deck {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+    max-width: 560px;
+  }
+  .masthead .meta {
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 32px; padding-top: 24px;
+    border-top: var(--rule);
+    font-size: .82rem; color: var(--ink-muted);
+  }
+  .masthead .meta span { white-space: nowrap; }
+
+  /* ═══ TOOL BODY ═══ */
+  .tool-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  /* ── Progress ── */
+  .progress {
+    display: flex; align-items: center;
+    margin-bottom: 48px;
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .progress-dots {
+    display: flex; gap: 6px; margin-left: auto;
+  }
+  .progress-dots span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border);
+    transition: background .3s;
+  }
+  .progress-dots span.done { background: var(--navy); }
+  .progress-dots span.current { background: var(--ink); }
+
+  /* ── Steps ── */
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn .4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .step-label {
+    font-family: var(--font-sans);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .step-heading {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .step-desc {
+    font-size: .92rem;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+  }
+
+  /* ── Options ── */
+  .option-list { display: flex; flex-direction: column; gap: 1px; }
+  .option {
+    display: flex; align-items: center;
+    padding: 16px 0;
+    border-top: var(--rule);
+    cursor: pointer;
+    transition: padding .2s;
+    font-size: .95rem;
+    color: var(--ink);
+  }
+  .option:last-child { border-bottom: var(--rule); }
+  .option:hover { padding-left: 8px; }
+  .option.selected { color: var(--navy); font-weight: 600; }
+  .option .indicator {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--border);
+    margin-right: 14px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .option.selected .indicator {
+    border-color: var(--navy);
+    background: var(--navy);
+  }
+  .option.selected .indicator::after {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff;
+  }
+  .option .tag {
+    margin-left: auto;
+    font-size: .78rem;
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  /* ── Actions ── */
+  .step-actions {
+    display: flex; gap: 16px; margin-top: 36px;
+  }
+  .btn {
+    display: inline-flex; align-items: center;
+    font-family: var(--font-sans);
+    font-size: .9rem; font-weight: 600;
+    cursor: pointer; border: none;
+    transition: all .2s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+    padding: 13px 36px;
+    letter-spacing: .02em;
+  }
+  .btn-primary:hover { background: var(--navy); }
+  .btn-primary:disabled { background: var(--border); color: var(--ink-muted); cursor: not-allowed; }
+  .btn-ghost {
+    background: none;
+    color: var(--ink-muted);
+    padding: 13px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .btn-ghost:hover { color: var(--ink); border-bottom-color: var(--border); }
+
+  /* ═══ RESULT ═══ */
+  .result-masthead {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: var(--rule);
+  }
+  .score-display {
+    display: flex; align-items: baseline; gap: 4px;
+    margin-bottom: 4px;
+  }
+  .score-number {
+    font-family: var(--font-serif);
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .score-unit {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--ink-muted);
+  }
+  .grade-tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 4px 0;
+    border-bottom: 2px solid;
+    margin-bottom: 20px;
+  }
+  .result-summary {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+    max-width: 480px;
+    margin-top: 16px;
+  }
+
+  /* Stats */
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-bottom: 40px;
+    border-top: var(--rule);
+    border-bottom: var(--rule);
+  }
+  
+  .stat {
+    padding: 24px 0;
+    border-top: var(--rule);
+    margin-top: -1px;
+  }
+  .stat-value {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .stat-label {
+    font-size: .82rem;
+    color: var(--ink-muted);
+  }
+
+  /* Recommendations */
+  .recs-heading {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .rec {
+    padding: 18px 0;
+    border-top: var(--rule);
+    display: flex; gap: 14px;
+  }
+  .rec:last-child { border-bottom: var(--rule); }
+  .rec-num {
+    font-family: var(--font-serif);
+    font-size: .85rem;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .rec-body strong {
+    display: block;
+    font-size: .95rem;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .rec-body p {
+    font-size: .84rem; color: var(--ink-muted); line-height: 1.5;
+  }
+
+  /* ═══ SHARE ═══ */
+  .share-section {
+    margin-top: 40px; padding-top: 28px;
+    border-top: 3px double var(--border-light);
+  }
+  .share-heading {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .share-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .share-btn {
+    display: inline-flex; align-items: center;
+    padding: 10px 22px;
+    font-family: var(--font-sans);
+    font-size: .84rem; font-weight: 600;
+    background: none;
+    border: var(--rule);
+    cursor: pointer;
+    color: var(--ink);
+    transition: all .15s;
+  }
+  .share-btn:hover { border-color: var(--ink); }
+  .share-btn.primary-share {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .share-btn.primary-share:hover { background: var(--navy); border-color: var(--navy); }
+
+  /* ═══ LEAD ═══ */
+  .lead {
+    margin-top: 32px;
+    padding: 32px;
+    background: var(--surface);
+    border: var(--rule);
+  }
+  .lead h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .lead p {
+    font-size: .9rem; color: var(--ink-muted); margin-bottom: 18px;
+  }
+  .lead-row {
+    display: flex; gap: 10px; max-width: 420px;
+  }
+  .lead-row input {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-bottom: var(--rule);
+    font-family: var(--font-sans);
+    font-size: .92rem;
+    background: transparent;
+    outline: none;
+    color: var(--ink);
+  }
+  .lead-row input:focus { border-bottom-color: var(--ink); }
+  .lead-row .btn-primary { white-space: nowrap; }
+  
+
+  /* Retake */
+  .retake {
+    margin-top: 28px; text-align: center;
+  }
+  .retake a {
+    font-size: .82rem; color: var(--ink-muted);
+    text-decoration: none; border-bottom: 1px solid var(--border-light);
+    cursor: pointer; padding-bottom: 2px;
+  }
+  .retake a:hover { color: var(--ink); border-bottom-color: var(--ink-muted); }
+
+  /* ═══ EDITORIAL CONTENT ═══ */
+  .editorial {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 20px 20px;
+    border-top: 3px double var(--border-light);
+  }
+  .editorial h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 48px 0 14px;
+    color: var(--ink);
+  }
+  .editorial h2:first-child { margin-top: 0; }
+  .editorial p {
+    font-size: .95rem;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+    line-height: 1.75;
+  }
+  .editorial strong { color: var(--ink); }
+  .editorial ul {
+    list-style: none; padding: 0; margin-bottom: 20px;
+  }
+  .editorial li {
+    font-size: .93rem;
+    color: var(--ink-light);
+    padding: 8px 0;
+    border-bottom: var(--rule);
+    line-height: 1.6;
+  }
+  .editorial li:first-child { border-top: var(--rule); }
+  .editorial li strong { display: block; margin-bottom: 2px; }
+
+  .faq-item { margin-bottom: 24px; }
+  .faq-q {
+    font-family: var(--font-serif);
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 4px; color: var(--ink);
+  }
+  .faq-a { font-size: .9rem; color: var(--ink-muted); line-height: 1.7; }
+
+  /* ═══ FOOTER ═══ */
+  footer {
+    max-width: 680px; margin: 40px auto 0;
+    padding: 32px 20px 48px;
+    border-top: var(--rule);
+    font-size: .8rem; color: var(--ink-muted);
+    text-align: center;
+  }
+  footer p + p { margin-top: 4px; }
+
+  /* ═══ TOAST ═══ */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--paper); padding: 12px 28px;
+    font-size: .85rem; font-weight: 600; font-family: var(--font-sans);
+    z-index: 999; pointer-events: none;
+    animation: toastIn .3s ease, toastOut .3s ease 1.7s forwards;
+  }
+  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
+
+  .hidden { display: none !important; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 600px) {
+  .masthead { padding: 40px 16px 28px; }
+  .masthead h1 { font-size: 1.7rem; line-height: 1.22; }
+  .masthead .widow { display: block; }
+  .masthead .deck { font-size: .95rem; }
+  .masthead .meta { gap: 10px; flex-wrap: wrap; font-size: .76rem; }
+  .masthead .meta span { white-space: normal; }
+  .tool-container { padding: 0 16px 32px; }
+  .progress { margin-bottom: 32px; font-size: .72rem; }
+  .step-heading { font-size: 1.3rem; }
+  .step-desc { font-size: .85rem; margin-bottom: 24px; }
+  .option { padding: 14px 0; font-size: .9rem; }
+  .option .tag { display: none; }
+  .btn-primary { padding: 14px 24px; font-size: .88rem; width: 100%; justify-content: center; }
+  .btn-ghost { font-size: .85rem; }
+  .step-actions { flex-direction: column-reverse; gap: 12px; margin-top: 28px; }
+  .step-actions .btn-ghost { text-align: center; justify-content: center; }
+  .stats { grid-template-columns: 1fr; }
+  .stat { padding: 20px 0; }
+  .stat-value { font-size: 1.5rem; }
+  .score-number { font-size: 4.5rem; }
+  .score-unit { font-size: 1.1rem; }
+  .result-summary { font-size: .95rem; }
+  .rec { padding: 14px 0; }
+  .rec-body strong { font-size: .9rem; }
+  .rec-body p { font-size: .8rem; }
+  .share-section { margin-top: 32px; padding-top: 24px; }
+  .share-row { flex-direction: column; gap: 8px; }
+  .share-btn { width: 100%; justify-content: center; padding: 12px 0; }
+  .lead { padding: 24px 18px; margin-top: 28px; }
+  .lead h3 { font-size: 1.05rem; }
+  .lead-row { flex-direction: column; gap: 16px; }
+  .lead-row input { padding: 12px 0; }
+  .lead-row .btn-primary { width: 100%; }
+  .retake { margin-top: 24px; }
+  .editorial { padding: 40px 16px 16px; }
+  .editorial h2 { font-size: 1.2rem; margin: 36px 0 12px; }
+  .editorial p { font-size: .88rem; }
+  .editorial li { font-size: .86rem; }
+  .faq-q { font-size: .93rem; }
+  .faq-a { font-size: .85rem; }
+  footer { padding: 24px 16px 36px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══ MASTHEAD ═══ -->
+<header class="masthead">
+  <div class="kicker">中小企业 · 特别企划</div>
+  <h1>你的企业，离 AI 自动化<span class="widow">还有多远？</span></h1>
+  <p class="deck">一份 3 分钟的测评，量化你的运营痛点，给出可落地的 AI 工作流建议。不卖概念，只看数据。</p>
+  <div class="meta">
+    <span>覆盖 6 大行业</span>
+    <span>·</span>
+    <span>完全免费</span>
+    <span>·</span>
+    <span>数据不上传</span>
+  </div>
+</header>
+
+<!-- ═══ TOOL ═══ -->
+<div class="tool-container" id="toolApp">
+
+  <!-- Progress -->
+  <div class="progress">
+    <span id="progressLabel">第 1 步 / 共 3 步</span>
+    <div class="progress-dots">
+      <span class="current" id="dot1"></span>
+      <span id="dot2"></span>
+      <span id="dot3"></span>
+    </div>
+  </div>
+
+  <!-- Step 1: Industry -->
+  <div class="step active" id="step1">
+    <div class="step-label">第 1 步</div>
+    <div class="step-heading">你的企业属于哪个行业？</div>
+    <div class="step-desc">不同行业的 AI 自动化重心差异很大，请选择最匹配的一项。</div>
+    <div class="option-list" id="industryOptions"></div>
+    <div class="step-actions">
+      <button class="btn btn-primary" id="toStep2" disabled>继续</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Pain Points -->
+  <div class="step" id="step2">
+    <div class="step-label">第 2 步</div>
+    <div class="step-heading">你的日常运营中，哪些环节最耗精力？</div>
+    <div class="step-desc">可多选。选得越真实，结果越精准。</div>
+    <div class="option-list" id="painOptions"></div>
+    <div class="step-actions">
+      <button class="btn btn-ghost" id="backStep1">← 返回</button>
+      <button class="btn btn-primary" id="toStep3" disabled style="margin-left:auto">继续</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Team Size -->
+  <div class="step" id="step3">
+    <div class="step-label">第 3 步</div>
+    <div class="step-heading">你的团队规模？</div>
+    <div class="step-desc">团队规模直接影响 AI 自动化的投入产出模型。</div>
+    <div class="option-list" id="sizeOptions"></div>
+    <div class="step-actions">
+      <button class="btn btn-ghost" id="backStep2">← 返回</button>
+      <button class="btn btn-primary" id="calculate" style="margin-left:auto">查看测评结果</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="step" id="result"></div>
+
+</div>
+
+<!-- ═══ EDITORIAL ═══ -->
+<div class="editorial">
+  <h2>为什么中小企业需要关心 AI 自动化</h2>
+  <p>过去两年，我们为超过 200 家中小企业搭建了 AI 工作流。一个反复出现的数字是：<strong>大部分中小企业有 40%–70% 的重复性运营工作可以通过 AI 自动化处理</strong>，而实际自动化率不到 5%。差距就是机会。</p>
+
+  <h2>哪些工作最适合交给 AI</h2>
+  <ul>
+    <li><strong>电商订单处理</strong>自动抓单、更新物流、发送通知，通常每天可节省 2–4 小时</li>
+    <li><strong>智能客服</strong>AI 7×24 自动回复常见问题，响应速度提升 80%</li>
+    <li><strong>数据报表</strong>自动汇总多平台销售、库存、财务数据并生成可视化报告</li>
+    <li><strong>营销内容</strong>AI 批量生成商品描述、广告文案、社交媒体内容</li>
+    <li><strong>客户跟进</strong>根据客户行为自动触发个性化消息和提醒</li>
+    <li><strong>库存管理</strong>低库存预警 + 销量预测 + 自动补货建议</li>
+  </ul>
+
+  <h2>落地需要多长时间？</h2>
+  <p>对于大多数中小企业场景，一个 AI 工作流从需求确认到上线运行，<strong>通常在 3–10 个工作日内完成</strong>。我们采用「轻咨询 + 标准化搭建 + 模型接入」的方式，避免重型定制开发的成本和周期。你投入的是一次性搭建费用，换回的是一个持续运行、永不休假的生产力系统。</p>
+
+  <h2>常见问题</h2>
+  <div class="faq-item">
+    <div class="faq-q">测评结果有多可靠？</div>
+    <div class="faq-a">测评基于 8 大高频运营场景的真实数据建模，结合行业权重和团队规模系数综合计算。它的目的不是给出一个"绝对分数"，而是帮你量化 AI 自动化的潜在空间，作为决策参考。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">我需要有技术基础吗？</div>
+    <div class="faq-a">不需要。你只需根据业务实际情况回答 3 个问题，全程不超过 3 分钟。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">我的数据会被上传吗？</div>
+    <div class="faq-a">不会。测评完全在你的浏览器本地运行，不会向任何服务器发送数据。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">测评之后呢？</div>
+    <div class="faq-a">你会立即看到自动化潜力分数、预估节省时间、以及针对性工作流推荐。如果希望进一步了解落地方案和行业案例，可以留下联系方式。</div>
+  </div>
+</div>
+
+<footer>
+  <p>AI Workflow Studio — 中小企业 AI 工作流搭建</p>
+  <p>测评完全免费 · 数据不上传 · 纯前端运行</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════ */
+const INDUSTRIES = [
+  { id: 'ecommerce',      label: '电商 / 零售' },
+  { id: 'food',           label: '餐饮' },
+  { id: 'education',      label: '教育培训' },
+  { id: 'service',        label: '专业服务 — 法律、财务、咨询' },
+  { id: 'manufacturing',  label: '制造业' },
+  { id: 'other',          label: '其他行业' },
+];
+
+const PAIN_POINTS = [
+  { id: 'customer_service', label: '客服消息太多，回不完',               hours: 15 },
+  { id: 'order_processing', label: '订单 / 预约处理太慢',                 hours: 12 },
+  { id: 'data_reports',     label: '报表与数据整理耗时',                   hours: 10 },
+  { id: 'marketing_content',label: '营销内容没时间写',                     hours: 8  },
+  { id: 'inventory',        label: '库存管理混乱',                         hours: 8  },
+  { id: 'accounting',       label: '财务对账头疼',                         hours: 10 },
+  { id: 'recruiting',       label: '招聘筛选简历太累',                     hours: 6  },
+  { id: 'follow_up',        label: '客户跟进不及时，老客户流失',           hours: 8  },
+];
+
+const SIZES = [
+  { id: 'micro',  label: '1–5 人',   tag: '个体户 / 微型团队' },
+  { id: 'small',  label: '6–20 人',  tag: '小型企业' },
+  { id: 'medium', label: '21–50 人', tag: '中小型企业' },
+  { id: 'large',  label: '50 人以上', tag: '成长型企业' },
+];
+
+const INDUSTRY_WEIGHTS = {
+  ecommerce: 1.15, food: 0.85, education: 0.95,
+  service: 0.90, manufacturing: 1.00, other: 0.95,
+};
+const SIZE_MULTIPLIERS = { micro: 0.85, small: 1.00, medium: 1.10, large: 1.20 };
+
+/* ═══════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════ */
+let state = { industry: null, pains: [], size: null };
+
+/* ═══════════════════════════════════════════
+   RENDER OPTIONS
+   ═══════════════════════════════════════════ */
+function renderOptions(containerId, items, selectedKey, isMulti) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  items.forEach(item => {
+    const isSelected = isMulti
+      ? (selectedKey || []).includes(item.id)
+      : selectedKey === item.id;
+    const div = document.createElement('div');
+    div.className = 'option' + (isSelected ? ' selected' : '');
+    div.innerHTML = `
+      <span class="indicator"></span>
+      <span>${item.label}</span>
+      ${item.tag ? `<span class="tag">${item.tag}</span>` : ''}
+    `;
+    div.addEventListener('click', () => {
+      if (isMulti) {
+        const idx = (state.pains || []).indexOf(item.id);
+        if (idx >= 0) state.pains.splice(idx, 1);
+        else state.pains.push(item.id);
+        renderOptions(containerId, items, state.pains, true);
+        updatePainNext();
+      } else {
+        if (containerId === 'industryOptions') {
+          state.industry = item.id;
+          renderOptions(containerId, items, item.id, false);
+          document.getElementById('toStep2').disabled = false;
+        } else if (containerId === 'sizeOptions') {
+          state.size = item.id;
+          renderOptions(containerId, items, item.id, false);
+        }
+      }
+    });
+    container.appendChild(div);
+  });
+}
+
+/* ═══════════════════════════════════════════
+   STEP NAVIGATION
+   ═══════════════════════════════════════════ */
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(n === 'result' ? 'result' : 'step' + n);
+  if (el) el.classList.add('active');
+
+  // Update dots
+  const dots = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
+  dots.forEach((d, i) => {
+    d.className = '';
+    if (n === 'result') { d.classList.add('done'); }
+    else if (i + 1 < n) { d.classList.add('done'); }
+    else if (i + 1 === n) { d.classList.add('current'); }
+  });
+
+  document.getElementById('progressLabel').textContent =
+    n === 'result' ? '测评结果' : `第 ${n} 步 / 共 3 步`;
+}
+
+function updatePainNext() {
+  document.getElementById('toStep3').disabled = state.pains.length === 0;
+}
+
+/* ═══════════════════════════════════════════
+   SCORING ENGINE
+   ═══════════════════════════════════════════ */
+function calculateScore() {
+  const { industry, pains, size } = state;
+  const totalHours = pains.reduce((sum, pid) => {
+    const pp = PAIN_POINTS.find(p => p.id === pid);
+    return sum + (pp ? pp.hours : 0);
+  }, 0);
+
+  let rawScore = Math.min(100, Math.round((totalHours / 60) * 100));
+  const iw = INDUSTRY_WEIGHTS[industry] || 1;
+  const sm = SIZE_MULTIPLIERS[size] || 1;
+  const countBonus = 1 + (pains.length - 1) * 0.04;
+  let score = Math.round(rawScore * iw * sm * countBonus);
+  score = Math.max(10, Math.min(99, score));
+
+  const weeklyHours = Math.round(totalHours * iw * sm * 0.65);
+  const monthlySavings = weeklyHours * 4 * 85;
+
+  let grade, gradeColor;
+  if (score >= 80)      { grade = '高度可自动化';   gradeColor = 'var(--green)'; }
+  else if (score >= 60) { grade = '非常适合自动化';  gradeColor = 'var(--navy)'; }
+  else if (score >= 40) { grade = '有较大自动化空间'; gradeColor = 'var(--amber)'; }
+  else if (score >= 20) { grade = '部分场景可自动化'; gradeColor = 'var(--red)'; }
+  else                  { grade = '自动化需求较低';   gradeColor = 'var(--ink-muted)'; }
+
+  const recs = pains.map(pid => PAIN_POINTS.find(p => p.id === pid)).filter(Boolean).map((pp, i) => ({
+    num: i + 1,
+    title: pp.label,
+    desc: getRecDesc(pp.id),
+  }));
+
+  // Summary text
+  let summary;
+  if (score >= 80) summary = `你的运营中有大量重复性工作，AI 自动化可以显著释放人力。根据你选择的 ${pains.length} 个痛点，我们预估了可量化的节省空间。`;
+  else if (score >= 60) summary = `你的企业在多个关键环节存在自动化机会。以下测算基于你勾选的 ${pains.length} 个痛点，每一项都有成熟的 AI 解决方案。`;
+  else if (score >= 40) summary = `你的企业有明确的自动化空间，但集中在部分环节。建议优先落地收益最高的 1–2 个工作流，再逐步扩展。`;
+  else summary = `根据你的选择，当前运营中重复性工作占比不高。但这不代表 AI 对你没有价值——在客户触达、内容生产等环节，AI 仍然可以提供效率提升。`;
+
+  return { score, grade, gradeColor, weeklyHours, monthlySavings, recs, summary };
+}
+
+function getRecDesc(painId) {
+  const map = {
+    customer_service: '接入 AI 智能客服，7×24 自动回复常见问题，复杂咨询转人工。响应速度提升 80% 以上。',
+    order_processing: '搭建订单自动处理管线：抓单 → 审核 → 通知 → 物流追踪，全链路无需人工干预。',
+    data_reports: 'AI 自动汇总多平台数据，按日/周/月生成可视化报表，告别手工 Excel。',
+    marketing_content: 'AI 批量生成商品描述、广告语、社媒文案，支持一键发布到多个平台。',
+    inventory: '低库存自动预警 + AI 销量预测 + 自动生成补货计划。',
+    accounting: 'AI 自动识别发票、分类费用、对账，财务工作量减少约 70%。',
+    recruiting: 'AI 自动筛选简历、发送面试邀约、跟进候选人状态。',
+    follow_up: '根据客户行为自动触发个性化跟进消息，老客户流失率显著降低。',
+  };
+  return map[painId] || '根据你的业务场景定制 AI 自动化工作流。';
+}
+
+/* ═══════════════════════════════════════════
+   RENDER RESULT
+   ═══════════════════════════════════════════ */
+function renderResult(r) {
+  const resultEl = document.getElementById('result');
+  const shareUrl = buildShareUrl(r);
+  const shareText = buildShareText(r);
+
+  resultEl.innerHTML = `
+    <div class="result-masthead">
+      <div class="score-display">
+        <span class="score-number" style="color:${r.gradeColor}">${r.score}</span>
+        <span class="score-unit">分</span>
+      </div>
+      <span class="grade-tag" style="border-bottom-color:${r.gradeColor};color:${r.gradeColor}">${r.grade}</span>
+      <p class="result-summary">${r.summary}</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">${r.weeklyHours} <span style="font-size:1rem">小时</span></div>
+        <div class="stat-label">预估每周可节省时间</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">&yen;${r.monthlySavings.toLocaleString()}</div>
+        <div class="stat-label">约等于每月可节省成本</div>
+      </div>
+    </div>
+
+    <div class="recs-heading">推荐 AI 工作流</div>
+    ${r.recs.map(rec => `
+      <div class="rec">
+        <span class="rec-num">0${rec.num}</span>
+        <div class="rec-body">
+          <strong>${rec.title}</strong>
+          <p>${rec.desc}</p>
+        </div>
+      </div>
+    `).join('')}
+
+    <div class="share-section">
+      <div class="share-heading">分享这份测评</div>
+      <div class="share-row">
+        <button class="share-btn primary-share" onclick="copyShareText()">复制成绩单</button>
+        <button class="share-btn" onclick="generateShareImage()">保存为图片</button>
+        <button class="share-btn" onclick="copyShareUrl()">复制链接</button>
+      </div>
+    </div>
+
+    <div class="lead">
+      <h3>获取你的专属落地方案</h3>
+      <p>留下手机号，我们会发一份<strong>针对你所在行业的 AI 工作流案例 + 实施路线图</strong>。</p>
+      <form class="lead-row" onsubmit="submitLead(event)">
+        <input type="tel" placeholder="输入手机号" required pattern="1[3-9]\\d{9}" maxlength="11">
+        <button type="submit" class="btn btn-primary">发送方案</button>
+      </form>
+    </div>
+
+    <div class="retake">
+      <a onclick="retake()">重新测评</a>
+    </div>
+  `;
+
+  resultEl._shareUrl = shareUrl;
+  resultEl._shareText = shareText;
+  resultEl._score = r;
+}
+
+function buildShareUrl(r) {
+  const params = new URLSearchParams();
+  params.set('s', r.score); params.set('i', state.industry);
+  params.set('p', state.pains.join(',')); params.set('z', state.size);
+  const url = new URL(window.location.href);
+  url.search = params.toString(); url.hash = '';
+  return url.toString();
+}
+
+function buildShareText(r) {
+  return `我的企业 AI 自动化潜力：${r.score} 分 — ${r.grade}
+
+每周可节省 ${r.weeklyHours} 小时 · 约 ¥${r.monthlySavings.toLocaleString()}/月
+
+推荐工作流：
+${r.recs.map(rec => `${rec.num}. ${rec.title}`).join('\n')}
+
+免费测评 → ${window.location.href.split('?')[0]}`;
+}
+
+/* ═══════════════════════════════════════════
+   SHARE
+   ═══════════════════════════════════════════ */
+function copyShareText() {
+  const text = document.getElementById('result')._shareText;
+  copyToClipboard(text, '成绩单已复制，去分享吧');
+}
+
+function copyShareUrl() {
+  copyToClipboard(document.getElementById('result')._shareUrl, '链接已复制');
+}
+
+function copyToClipboard(text, msg) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showToast(msg));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast(msg);
+  }
+}
+
+function generateShareImage() {
+  const r = document.getElementById('result')._score;
+  const canvas = document.createElement('canvas');
+  const W = 750, H = 1000;
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Paper background
+  ctx.fillStyle = '#FAFAF8';
+  ctx.fillRect(0, 0, W, H);
+
+  // Top accent bar
+  ctx.fillStyle = '#1A1A1A';
+  ctx.fillRect(0, 0, W, 4);
+
+  // Header
+  ctx.fillStyle = '#1A3A5C';
+  ctx.font = '600 14px -apple-system, "Noto Sans SC", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('中小企业 · 特别企划', 60, 52);
+
+  ctx.fillStyle = '#1A1A1A';
+  ctx.font = 'bold 48px Georgia, "Noto Serif SC", serif';
+  ctx.fillText('AI 自动化潜力测评', 60, 110);
+
+  // Divider
+  ctx.strokeStyle = '#D8D8D0';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(60, 140); ctx.lineTo(W-60, 140); ctx.stroke();
+
+  // Score
+  ctx.fillStyle = r.gradeColor;
+  ctx.font = 'bold 160px Georgia, "Noto Serif SC", serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(r.score.toString(), W/2, 310);
+  ctx.fillStyle = '#8A8A82';
+  ctx.font = '28px Georgia, "Noto Serif SC", serif';
+  ctx.fillText('分', W/2 + 70, 310);
+
+  // Grade
+  ctx.fillStyle = r.gradeColor;
+  ctx.font = '600 18px -apple-system, "Noto Sans SC", sans-serif';
+  ctx.fillText(r.grade, W/2, 360);
+
+  // Stats
+  const statY = 420;
+  ctx.strokeStyle = '#D8D8D0';
+  ctx.beginPath(); ctx.moveTo(60, statY-10); ctx.lineTo(W-60, statY-10); ctx.stroke();
+
+  ctx.fillStyle = '#1A1A1A';
+  ctx.font = 'bold 36px Georgia, "Noto Serif SC", serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(r.weeklyHours + ' 小时/周', 60, statY+44);
+
+  ctx.font = 'bold 36px Georgia, "Noto Serif SC", serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('¥' + r.monthlySavings.toLocaleString() + '/月', W-60, statY+44);
+
+  ctx.fillStyle = '#8A8A82';
+  ctx.font = '15px -apple-system, "Noto Sans SC", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('预估每周可节省时间', 60, statY+70);
+  ctx.textAlign = 'right';
+  ctx.fillText('约等于每月可节省成本', W-60, statY+70);
+
+  ctx.beginPath(); ctx.moveTo(60, statY+95); ctx.lineTo(W-60, statY+95); ctx.stroke();
+
+  // Recommendations
+  const recY = statY + 130;
+  ctx.fillStyle = '#1A1A1A';
+  ctx.font = 'bold 22px Georgia, "Noto Serif SC", serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('推荐 AI 工作流', 60, recY);
+
+  r.recs.forEach((rec, i) => {
+    const y = recY + 34 + i * 38;
+    ctx.fillStyle = '#8A8A82';
+    ctx.font = '16px Georgia, "Noto Serif SC", serif';
+    ctx.fillText('0' + rec.num, 60, y);
+    ctx.fillStyle = '#1A1A1A';
+    ctx.font = '18px -apple-system, "Noto Sans SC", sans-serif';
+    ctx.fillText(rec.title, 92, y);
+  });
+
+  // Footer
+  ctx.fillStyle = '#8A8A82';
+  ctx.font = '14px -apple-system, "Noto Sans SC", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('AI Workflow Studio — 中小企业 AI 工作流搭建', W/2, H-50);
+  ctx.fillText(window.location.hostname || '', W/2, H-28);
+
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'AI自动化潜力测评.png';
+    a.click(); URL.revokeObjectURL(url);
+    showToast('图片已保存，长按可分享到朋友圈');
+  }, 'image/png');
+}
+
+/* ═══════════════════════════════════════════
+   LEAD
+   ═══════════════════════════════════════════ */
+function submitLead(e) {
+  e.preventDefault();
+  const phone = e.target.querySelector('input').value;
+  if (!/^1[3-9]\d{9}$/.test(phone)) {
+    showToast('请输入正确的手机号');
+    return;
+  }
+  const leads = JSON.parse(localStorage.getItem('ai_tool_leads') || '[]');
+  leads.push({ phone, score: document.getElementById('result')._score.score, date: new Date().toISOString() });
+  localStorage.setItem('ai_tool_leads', JSON.stringify(leads));
+  showToast('提交成功，我们会尽快联系 ' + phone);
+  e.target.reset();
+}
+
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
+function showToast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2200);
+}
+
+/* ═══════════════════════════════════════════
+   RETAKE
+   ═══════════════════════════════════════════ */
+function retake() {
+  state = { industry: null, pains: [], size: null };
+  renderOptions('industryOptions', INDUSTRIES, null, false);
+  renderOptions('painOptions', PAIN_POINTS, [], true);
+  renderOptions('sizeOptions', SIZES, null, false);
+  document.getElementById('toStep2').disabled = true;
+  document.getElementById('toStep3').disabled = true;
+  showStep(1);
+  window.scrollTo({ top: document.getElementById('toolApp').offsetTop - 60, behavior: 'smooth' });
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+function init() {
+  renderOptions('industryOptions', INDUSTRIES, null, false);
+  renderOptions('painOptions', PAIN_POINTS, [], true);
+  renderOptions('sizeOptions', SIZES, null, false);
+
+  document.getElementById('toStep2').addEventListener('click', () => { showStep(2); window.scrollTo({ top: document.getElementById('toolApp').offsetTop - 60, behavior: 'smooth' }); });
+  document.getElementById('backStep1').addEventListener('click', () => showStep(1));
+  document.getElementById('toStep3').addEventListener('click', () => showStep(3));
+  document.getElementById('backStep2').addEventListener('click', () => showStep(2));
+  document.getElementById('calculate').addEventListener('click', () => {
+    const r = calculateScore();
+    renderResult(r);
+    showStep('result');
+    window.scrollTo({ top: document.getElementById('toolApp').offsetTop - 60, behavior: 'smooth' });
+  });
+
+  // Shared result link
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('s')) {
+    const score = parseInt(params.get('s'));
+    const industry = params.get('i');
+    const pains = (params.get('p') || '').split(',').filter(Boolean);
+    const size = params.get('z');
+    if (score && industry && pains.length && size) {
+      state.industry = industry; state.pains = pains; state.size = size;
+      const r = calculateScore();
+      renderResult(r);
+      showStep('result');
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
