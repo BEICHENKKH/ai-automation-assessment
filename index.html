@@ -1024,11 +1024,38 @@ function submitLead(e) {
     showToast('请输入正确的手机号');
     return;
   }
-  const leads = JSON.parse(localStorage.getItem('ai_tool_leads') || '[]');
-  leads.push({ phone, score: document.getElementById('result')._score.score, date: new Date().toISOString() });
-  localStorage.setItem('ai_tool_leads', JSON.stringify(leads));
-  showToast('提交成功，我们会尽快联系 ' + phone);
-  e.target.reset();
+  const r = document.getElementById('result')._score;
+  const btn = e.target.querySelector('button');
+  btn.textContent = '提交中...';
+  btn.disabled = true;
+
+  fetch('/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      phone,
+      score: r.score,
+      industry: state.industry,
+      pains: state.pains,
+      size: state.size,
+    }),
+  })
+  .then(res => res.json())
+  .then(data => {
+    btn.textContent = '发送方案';
+    btn.disabled = false;
+    if (data.ok) {
+      showToast('提交成功，我们会尽快联系 ' + phone);
+      e.target.reset();
+    } else {
+      showToast('提交失败：' + (data.error || '请稍后重试'));
+    }
+  })
+  .catch(err => {
+    btn.textContent = '发送方案';
+    btn.disabled = false;
+    showToast('网络错误，请稍后重试');
+  });
 }
 
 /* ═══════════════════════════════════════════
